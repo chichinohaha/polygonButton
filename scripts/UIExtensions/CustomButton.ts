@@ -7,10 +7,11 @@
 
 
 
-const {ccclass, property,inspector} = cc._decorator;
+const {menu,ccclass, property,inspector} = cc._decorator;
 
 @ccclass
-@inspector("packages://ui-extensions/compiled/inspectors/CustomButtonInspector.js")
+@inspector("packages://polygon-button/compiled/inspectors/CustomButtonInspector.js")
+@menu('ui-extensions/polygonButton')
 export default class CustomButton extends cc.Button {
 
     @property()
@@ -46,10 +47,10 @@ export default class CustomButton extends cc.Button {
     polygon:cc.Vec2[]=[]
     resetPolygon(){
         const box=this.node.getBoundingBox()
-        const xmax=box.xMax-this.node.x
-        const xmin=box.xMin-this.node.x
-        const ymax=box.yMax-this.node.y
-        const ymin=box.yMin-this.node.y
+        const xmax=(box.xMax-this.node.x)/this.node.scaleX
+        const xmin=(box.xMin-this.node.x)/this.node.scaleX
+        const ymax=(box.yMax-this.node.y)/this.node.scaleY
+        const ymin=(box.yMin-this.node.y)/this.node.scaleY
         this.polygon=[cc.v2(xmin,ymin),cc.v2(xmax,ymin),cc.v2(xmax,ymax),cc.v2(xmin,ymax)]
     }
     onLoad()
